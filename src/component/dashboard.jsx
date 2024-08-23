@@ -1,8 +1,9 @@
+// src/components/Dashboard.jsx
 import React from "react";
-import { useFinance } from "../context/financecontext.jsx"; // Corrected path
+import { useFinance } from "../context/financecontext.jsx";
 
 const Dashboard = () => {
-  const { state } = useFinance();
+  const { state, balance } = useFinance();
 
   const totalIncome = state.income.reduce((sum, item) => sum + item.amount, 0);
   const totalExpenses = state.expenses.reduce(
@@ -31,6 +32,10 @@ const Dashboard = () => {
         <div className="bg-white shadow rounded-lg p-6">
           <h2 className="text-lg font-semibold">Savings Goals</h2>
           <p className="text-2xl mt-2">${totalSavings}</p>
+        </div>
+        <div className="bg-white shadow rounded-lg p-6">
+          <h2 className="text-lg font-semibold">Total Balance</h2>
+          <p className="text-2xl mt-2">${balance.toFixed(2)}</p>
         </div>
       </div>
     </div>

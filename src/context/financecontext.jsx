@@ -1,4 +1,5 @@
-import React, { createContext, useReducer, useContext } from "react";
+// src/context/financecontext.jsx
+import React, { createContext, useReducer, useContext, useState } from "react";
 
 // Define initial state
 const initialState = {
@@ -33,9 +34,16 @@ const financeReducer = (state, action) => {
 // Create the provider component
 function FinanceProvider({ children }) {
   const [state, dispatch] = useReducer(financeReducer, initialState);
+  const [balance, setBalance] = useState(0);
+
+  const updateBalance = (amount) => {
+    setBalance((prevBalance) => prevBalance + amount);
+  };
 
   return (
-    <FinanceContext.Provider value={{ state, dispatch }}>
+    <FinanceContext.Provider
+      value={{ state, dispatch, balance, updateBalance }}
+    >
       {children}
     </FinanceContext.Provider>
   );
